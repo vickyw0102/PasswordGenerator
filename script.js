@@ -1,6 +1,6 @@
-var generateBtn = document.querySelector("#generate");
+const generateBtn = document.querySelector("#generate");
 // Array of special characters to be included in password
-var specialCharacters = [
+const specialCharacters = [
   '@',
   '%',
   '+',
@@ -26,10 +26,10 @@ var specialCharacters = [
 ];
 
 // Array of numeric characters to be included in password
-var numericCharacters = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+const numericCharacters = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
 // Array of lowercase characters to be included in password
-var lowerCasedCharacters = [
+const lowerCasedCharacters = [
   'a',
   'b',
   'c',
@@ -59,7 +59,7 @@ var lowerCasedCharacters = [
 ];
 
 // Array of uppercase characters to be included in password
-var upperCasedCharacters = [
+const upperCasedCharacters = [
   'A',
   'B',
   'C',
@@ -90,20 +90,16 @@ var upperCasedCharacters = [
 
 // Function to prompt user for password options
 function getPasswordOptions() {
-  let charactersLength = parseInt()
+  let charactersLength = 
     prompt ("How many characters would you like to use between 8 and 128?")
     ;
     if (charactersLength > 7 && charactersLength < 129) {
-  
-      var specialCharacters = confirm ("Do you like to have special Characters?");
-      var numericCharacters = confirm ("Do you like to have numberic?");
-      var lowerCasedCharacters = confirm ("Do you like to have lowerCase?");
-      var upperCasedCharacters = confirm ("Do you like to have uppercase?");
-    
-  // if (!specialCharacters && !numbericCharacters && !lowerCasedCharacters && !upperCasedCharacters){
-  // alert("error")}
-
-      var options = {
+      let specialCharacters = confirm ("Do you like to have special Characters?");
+      let numericCharacters = confirm ("Do you like to have numberic?");
+      let lowerCasedCharacters= confirm ("Do you like to have lowerCase?");
+      let upperCasedCharacters = confirm ("Do you like to have uppercase?");
+ 
+      let options = {
         length : charactersLength,
         specialCharactersconfirm : specialCharacters,
         numericCharactersconfirm: numericCharacters,
@@ -137,13 +133,22 @@ function generatePassword() {
       userChoice += specialCharacters.join("");
     }
 
-    for (let i = 0; i < userPasswordChoices.strength; i++) {
+    for (let i = 0; i < userPasswordChoices.length; i++) {
       let random = Math.floor(Math.random() * userChoice.length);
       password += userChoice.charAt(random);
     }
   
     return password;
   }
+
+function writePassword() {
+  const finalPassword = generatePassword();
+
+  var passwordText = document.querySelector("#password");
+
+  passwordText.value = finalPassword;
+}
+generateBtn.addEventListener("click", writePassword);
     
 //Function for getting a random element from an array
 // function getRandom(arr) {
@@ -155,34 +160,25 @@ function generatePassword() {
 //   return password;
 // }
 
-//   var randomiser = Math.floor(Math.random() = arr.length);
+//   const randomiser = Math.floor(Math.random() = arr.length);
 //   arr(randomiser)
 
 // return arr [randomiser];
 
 
-//  var options = getPasswordOption();
-//  var password = options.password{};
+//  const options = getPasswordOption();
+//  const password = options.password{};
 //  if (option.specialCharacterconfirm){
 //   password.push (getRandom(specialCharacters));
 
 // }
 
 // // Get references to the #generate element
-// var generateBtn = document.querySelector('#generate');
+// const generateBtn = document.querySelector('#generate');
 
 // Write password to the #password input
-function writePassword() {
-  var finalPassword = generatePassword();
-
-  var passwordText = document.querySelector("#password");
-
-  passwordText.value = finalPassword;
-}
-generateBtn.addEventListener("click", writePassword);
-
-//   var password = generatePassword();
-//   var passwordText = document.querySelector('#password');
+//   const password = generatePassword();
+//   const passwordText = document.querySelector('#password');
 
 //   passwordText.value = password;
 // }
