@@ -1,3 +1,4 @@
+var generateBtn = document.querySelector("#generate");
 // Array of special characters to be included in password
 var specialCharacters = [
   '@',
@@ -84,66 +85,107 @@ var upperCasedCharacters = [
   'W',
   'X',
   'Y',
-  'Z'
+  'Z',
 ];
 
 // Function to prompt user for password options
 function getPasswordOptions() {
-  let charactersLength = prompt ("How many characters would you like to use between 8 and 128?");
-    if (charactersLength >7 && charactersLength <129) {
+  let charactersLength = parseInt()
+    prompt ("How many characters would you like to use between 8 and 128?")
+    ;
+    if (charactersLength > 7 && charactersLength < 129) {
   
-      var specialCharacters = confirm (`Do you like to have special Charaters`);
-      var numericCharacters = confirm (`Do you like to have numberic`);
-      var lowerCasedCharacters = confirm (`Do you like to have lowerCase`);
-      var upperCasedCharacters = confirm (`Do you like to have uppdercase`);
+      var specialCharacters = confirm ("Do you like to have special Characters?");
+      var numericCharacters = confirm ("Do you like to have numberic?");
+      var lowerCasedCharacters = confirm ("Do you like to have lowerCase?");
+      var upperCasedCharacters = confirm ("Do you like to have uppercase?");
     
   // if (!specialCharacters && !numbericCharacters && !lowerCasedCharacters && !upperCasedCharacters){
   // alert("error")}
 
       var options = {
-        strength : charactersLength,
-        specialCharacterconfirm : specialCharacters,
-        numbericCharactersconfirm : numericCharacters,
+        length : charactersLength,
+        specialCharactersconfirm : specialCharacters,
+        numericCharactersconfirm: numericCharacters,
         lowerCasedCharactersconfirm : lowerCasedCharacters,
-        upperCasedCharactersconfirm : pperCasedCharacters,
+        upperCasedCharactersconfirm : upperCasedCharacters,
       };
+       //Sends the user password options out to generatePassword()
       return options;
+
     } else {
-      alert("Please enter a number between 8 and 128");
+      alert("Please enter a number between 8 and 128 again.");
     }  
-
-  }
-
-
-
-
-// Function for getting a random element from an array
-function getRandom(arr) {
-  var randomiser = Math.floor(Math.random() = arr.length);
-  arr(randomiser)
 }
-return arr [randomiser];
-
 // Function to generate password with user input
 function generatePassword() {
- var options = getPasswordOption();
- var password = options.password{};
- if (option.specialCharacterconfirm){
-  password.push (getRandom(specialCharacters));
+    //calls in the user choices from passwordOptions()
+    let userPasswordChoices = getPasswordOptions();
+    let userChoice = "";
+    let password = "";
+    
+    if (userPasswordChoices.upperCasedCharactersconfirm) {
+      userChoice += upperCasedCharacters.join("");
+    }
+    if (userPasswordChoices.lowerCasedCharactersconfirm) {
+      userChoice += lowerCasedCharacters.join("");
+    }
+    if (userPasswordChoices.numericCharactersconfirm) {
+      userChoice += numericCharacters.join("");
+    }
+    if (userPasswordChoices.specialCharactersconfirm) {
+      userChoice += specialCharacters.join("");
+    }
 
- }
-}
+    for (let i = 0; i < userPasswordChoices.strength; i++) {
+      let random = Math.floor(Math.random() * userChoice.length);
+      password += userChoice.charAt(random);
+    }
+  
+    return password;
+  }
+    
+//Function for getting a random element from an array
+// function getRandom(arr) {
+//     for (let i = 0; i < userPasswordChoices.strength; i++) {
+//     let random = Math.floor(Math.random() * userChoice.length);
+//     password += userChoice.charAt(random);
+//   }
 
-// Get references to the #generate element
-var generateBtn = document.querySelector('#generate');
+//   return password;
+// }
+
+//   var randomiser = Math.floor(Math.random() = arr.length);
+//   arr(randomiser)
+
+// return arr [randomiser];
+
+
+//  var options = getPasswordOption();
+//  var password = options.password{};
+//  if (option.specialCharacterconfirm){
+//   password.push (getRandom(specialCharacters));
+
+// }
+
+// // Get references to the #generate element
+// var generateBtn = document.querySelector('#generate');
 
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector('#password');
+  var finalPassword = generatePassword();
 
-  passwordText.value = password;
+  var passwordText = document.querySelector("#password");
+
+  passwordText.value = finalPassword;
 }
+generateBtn.addEventListener("click", writePassword);
 
-// Add event listener to generate button
-generateBtn.addEventListener('click', writePassword);
+//   var password = generatePassword();
+//   var passwordText = document.querySelector('#password');
+
+//   passwordText.value = password;
+// }
+
+// // Add event listener to generate button
+// generateBtn.addEventListener('click', writePassword);
